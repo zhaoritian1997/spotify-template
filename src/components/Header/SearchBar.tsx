@@ -46,7 +46,7 @@ export default function SearchBar() {
             <Input type="text" placeholder="What do you want to play?" className={clsx("w-full h-[48px] p-[12px_64px_12px_48px] bg-[#1f1f1f] text-[16px] group-hover:bg-[#2a2a2a] transition-all duration-300 rounded-full border-[2px] border-[transparent] focus:border-white", search && "text-white")} value={search} onChange={(e) => setSearch(e.target.value)} />
             <div className="absolute top-1/2 right-0 -translate-y-1/2 flex items-center">
               {search ?
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 end-[18px]">
+                <div className="absolute top-1/2 right-[16px] -translate-y-1/2">
                   <div className="h-[24px] pr-[4px]">
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -61,10 +61,11 @@ export default function SearchBar() {
                     </Tooltip>
                   </div>
                 </div>
-                : <div className="absolute top-1/2 right-0 -translate-y-1/2 end-[18px]">
+                : <div className="absolute top-1/2 right-[16px] -translate-y-1/2">
                   <div className="border-l-[0.5px] p-[0_4px_0_12px] border-[#b3b3b3] h-[24px]">
                     <Tooltip>
                       <TooltipTrigger asChild>
+
                         <button className="flex items-center justify-center text-[#b3b3b3] hover:text-[#fff] hover:scale-105 transition-all duration-300">
                           <StoreSvg className="w-[24px] h-[24px] fill-current" />
                         </button>

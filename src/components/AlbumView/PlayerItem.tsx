@@ -2,9 +2,21 @@ import React from "react";
 import { PlayingSongInfo } from "@/types";
 import Image from "next/image";
 import PlayGif from "@/assets/images/equaliser-animated-green.gif";
-import { PlaySvg, PauseSvg, AddSvg, CheckMarkSvg, MenuSvg } from "@/components/svgComponents";
+import { PlaySvg, PauseSvg, AddSvg, CheckMarkSvg, MenuSvg, SearchSvg, AddToQueueSvg, SongRadioSvg, GoToArtistSvg, ViewCreditsSvg, ShareSvg, LogoSvg, PlusSvg } from "@/components/svgComponents";
 import { usePlayingProvider } from "@/hooks/usePlayProvider";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+  DropdownMenuPortal,
+} from "@/components/ui/dropdown-menu"
 import clsx from "clsx";
+
 export default function PlayerItem({ song, index, viewType }: { song: PlayingSongInfo, index: number, viewType: "list" | "compact" }) {
   const { isPlaying, setIsPlaying, playingSongInfo, setPlayingSongInfo } = usePlayingProvider();
   const isCurrentSong = playingSongInfo?.id === song.id;
@@ -47,9 +59,77 @@ export default function PlayerItem({ song, index, viewType }: { song: PlayingSon
         }
       </div>
       <span className="text-[14px] text-white/60 select-none">{song.duration}</span>
-      <span className="flex items-center justify-center opacity-0 group-hover/playerItem:opacity-100 transition-all duration-300">
-        <MenuSvg className="w-[16px] h-[16px]" />
-      </span>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+          <span className="flex items-center justify-center opacity-0 group-hover/playerItem:opacity-100 transition-all duration-300">
+            <MenuSvg className="w-[16px] h-[16px]" />
+          </span>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent side="bottom" align="end" className="w-[213px] p-[4px] text-white bg-[#282828] border-none">
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger className="p-0 text-white hover:text-white">
+                <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                  <PlusSvg className="w-[16px] h-[16px]" />
+                  Add to playlist</div>
+              </DropdownMenuSubTrigger>
+              <DropdownMenuPortal>
+                <DropdownMenuSubContent className="text-white p-0 bg-[#282828] border-none">
+                  <DropdownMenuItem>
+                    <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                      <SearchSvg className="w-[16px] h-[16px]" />
+                      Search playlists
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                      <PlusSvg className="w-[16px] h-[16px]" />
+                      New playlist</div>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>More...</DropdownMenuItem>
+                </DropdownMenuSubContent>
+              </DropdownMenuPortal>
+            </DropdownMenuSub>
+            <DropdownMenuItem className="p-0 text-white hover:text-white">
+              <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                <AddSvg className="w-[16px] h-[16px]" />
+                Save to library Songs</div>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="p-0 text-white hover:text-white">
+              <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                <AddToQueueSvg className="w-[16px] h-[16px]" />
+                Add to queue</div>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-[#fff] bg-opacity-10" />
+            <DropdownMenuItem className="p-0 text-white hover:text-white" >
+              <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                <SongRadioSvg className="w-[16px] h-[16px]" />
+                Go to song radio</div>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="p-0 text-white hover:text-white">
+              <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                <GoToArtistSvg className="w-[16px] h-[16px]" />
+                Go to artist</div>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="p-0 text-white hover:text-white">
+              <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                <ViewCreditsSvg className="w-[16px] h-[16px]" />
+                View credits</div>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-[#fff] bg-opacity-10" />
+            <DropdownMenuItem className="p-0 text-white hover:text-white" >
+              <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                <ShareSvg className="w-[16px] h-[16px]" />
+                Share</div>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-[#fff] bg-opacity-10" />
+            <DropdownMenuItem className="p-0 text-white hover:text-white">
+              <div className="w-full h-full flex items-center gap-[16px] p-[12px_8px_12px_12px] text-[14px]  opacity-90 hover:bg-[#fff] hover:bg-opacity-10">
+                <LogoSvg className="w-[16px] h-[16px]" />
+                Open in desktop app</div>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
     </div>
   </div>;
 }
